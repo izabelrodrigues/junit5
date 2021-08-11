@@ -15,36 +15,11 @@ import br.com.izabelrodrigues.tdd.modelo.Funcionario;
 public class ReajusteService {
 
 	public void efetuarReajuste(Funcionario funcionario, Desempenho desempenho) {
-		switch (desempenho) {
-		case A_DESEJAR:
-			reajustarSalarioPorDesempenhoADesejar(funcionario);
-			break;
-		case BOM:
-			reajustarSalarioPorDesempenhoBom(funcionario);
-			break;
-		case OTIMO:
-			reajustarSalarioPorDesempenhoOtimo(funcionario);
-
-		default:
-			break;
-		}
-
+		reajustarSalarioPorDesempenho(funcionario, desempenho.getFatorReajuste());
 	}
 
-	private void reajustarSalarioPorDesempenhoOtimo(Funcionario funcionario) {
-		BigDecimal reajuste = funcionario.getSalario().multiply(new BigDecimal("0.20"));
-		funcionario.reajustarSalario(reajuste);
-
-	}
-
-	private void reajustarSalarioPorDesempenhoBom(Funcionario funcionario) {
-		BigDecimal reajuste = funcionario.getSalario().multiply(new BigDecimal("0.15"));
-		funcionario.reajustarSalario(reajuste);
-
-	}
-
-	private void reajustarSalarioPorDesempenhoADesejar(Funcionario funcionario) {
-		BigDecimal reajuste = funcionario.getSalario().multiply(new BigDecimal("0.03"));
+	private void reajustarSalarioPorDesempenho(Funcionario funcionario, BigDecimal fatorDesempenho) {
+		BigDecimal reajuste = funcionario.getSalario().multiply(fatorDesempenho);
 		funcionario.reajustarSalario(reajuste);
 	}
 
