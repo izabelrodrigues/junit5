@@ -4,6 +4,7 @@
 package br.com.izabelrodrigues.tdd.modelo;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 
 /**
@@ -32,5 +33,9 @@ public class Funcionario {
 
 	public BigDecimal getSalario() {
 		return salario;
+	}
+
+	public void reajustarSalario(BigDecimal reajuste) {
+		salario = this.salario.add(reajuste).setScale(2, RoundingMode.HALF_UP);
 	}
 }
