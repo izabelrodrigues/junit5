@@ -1,6 +1,7 @@
 package br.com.izabelrodrigues.tdd.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -17,10 +18,7 @@ class BonusServiceTest {
 
 		Funcionario funcionario = new Funcionario("FUNC_SALARIO_MAIOR", LocalDate.now(), new BigDecimal(25000.00));
 		BonusService bonusService = new BonusService();
-		BigDecimal bonusCalculado = bonusService.calcularBonus(funcionario);
-
-		BigDecimal bonusEsperado = new BigDecimal("0.00");
-		assertEquals(bonusEsperado, bonusCalculado, "Salários maiores que R$10000,00 não deveria receber bônus!");
+		assertThrows(IllegalArgumentException.class, () -> bonusService.calcularBonus(funcionario));
 	}
 
 	@Test
